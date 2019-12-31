@@ -1,3 +1,5 @@
+require("dotenv").config();
+
 const express = require("express");
 const exphbrs = require("express-handlebars");
 const burgerController = require("./controllers/burger_controller");

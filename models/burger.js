@@ -27,7 +27,7 @@ function selectAll() {
 }
 
 function insertOne(values) {
-    orm.insertOne(BURGER_TABLE)
+    orm.insertOne(BURGER_TABLE, values)
         .then(result => {
             return result;
         });
