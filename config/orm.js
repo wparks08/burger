@@ -1,54 +1,49 @@
 const connection = require("./connection");
 
-function selectAll(table) {
-    return new Promise((resolve, reject) => {
-        connection.query(
-            `SELECT * FROM ${table}`,
-            (err, result) => {
+orm = {
+    selectAll: function(table) {
+        return new Promise((resolve, reject) => {
+            connection.query(`SELECT * FROM ${table}`, (err, result) => {
                 if (err) {
                     reject(error);
                 }
                 console.log("ORM RESULT", result);
                 resolve(result);
-            }
-        )
-    })
-}
+            });
+        });
+    },
 
-function insertOne(table, values) {
-    return new Promise((resolve, reject) => {
-        connection.query(
-            `INSERT INTO ${table} SET ?`,
-            values,
-            (err, result) => {
-                if (err) {
-                    reject(error)
+    insertOne: function(table, values) {
+        return new Promise((resolve, reject) => {
+            connection.query(
+                `INSERT INTO ${table} SET ?`,
+                values,
+                (err, result) => {
+                    if (err) {
+                        reject(error);
+                    }
+
+                    resolve(result);
                 }
+            );
+        });
+    },
 
-                resolve(result);
-            }
-        )
-    })
-}
+    updateOne: function(table, values, conditions) {
+        return new Promise((resolve, reject) => {
+            connection.query(
+                `UPDATE ${table} SET ? WHERE ?`,
+                [values, conditions],
+                (err, result) => {
+                    if (err) {
+                        reject(error);
+                    }
 
-function updateOne(table, values, conditions) {
-    return new Promise((resolve, reject) => {
-        connection.query(
-            `UPDATE ${table} SET ? WHERE ?`,
-            [values, conditions],
-            (err, result) => {
-                if (err) {
-                    reject(error);
+                    resolve(result);
                 }
+            );
+        });
+    }
+};
 
-                resolve(result);
-            }
-        )
-    })
-}
-
-module.exports = {
-    selectAll,
-    insertOne,
-    updateOne
-}
+module.exports = orm;
