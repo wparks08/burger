@@ -23,25 +23,35 @@ function selectAll() {
             .catch(err => {
                 reject(err);
             });
-    })
+    });
 }
 
 function insertOne(values) {
-    orm.insertOne(BURGER_TABLE, values)
-        .then(result => {
-            return result;
-        });
+    return new Promise((resolve, reject) => {
+        orm.insertOne(BURGER_TABLE, values)
+            .then(result => {
+                resolve(result);
+            })
+            .catch(err => {
+                reject(err);
+            });
+    });
 }
 
 function updateOne(values, conditions) {
-    orm.updateOne(BURGER_TABLE, values, conditions)
+    return new Promise((resolve, reject) => {
+        orm.updateOne(BURGER_TABLE, values, conditions)
         .then(result => {
-            return result;
+            resolve(result);
+        })
+        .catch(err => {
+            reject(err)
         });
+    });
 }
 
 module.exports = {
     selectAll,
     insertOne,
     updateOne
-}
+};
