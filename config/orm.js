@@ -5,7 +5,7 @@ orm = {
         return new Promise((resolve, reject) => {
             connection.query(`SELECT * FROM ${table}`, (err, result) => {
                 if (err) {
-                    reject(error);
+                    reject(err);
                 }
                 console.log("ORM RESULT", result);
                 resolve(result);
@@ -20,7 +20,7 @@ orm = {
                 values,
                 (err, result) => {
                     if (err) {
-                        reject(error);
+                        reject(err);
                     }
 
                     resolve(result);
@@ -36,7 +36,7 @@ orm = {
                 [values, conditions],
                 (err, result) => {
                     if (err) {
-                        reject(error);
+                        reject(err);
                     }
 
                     resolve(result);
