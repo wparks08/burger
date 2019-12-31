@@ -5,14 +5,23 @@ const router = express.Router();
 
 router.get("/", (req, res) => {
     Burger.selectAll().then(burgers => {
-        res.render("index", { burgers });
+        let devoured = [];
+        let notDevoured = [];
+
+        burgers.forEach(burger => {
+            if (burger.devoured) {
+                devoured.push(burger);
+            } else {
+                notDevoured.push(burger);
+            }
+        });
+
+        res.render("index", { devoured, notDevoured });
     });
 });
 
 router.post("/api/burger", (req, res) => {
-    let burger = req.body;
-
-    Burger.insertOne(burger)
+    Burger.insertOne(JSON.parse(req.body))
     .then(result => {
         res.redirect("/");
     })
@@ -22,9 +31,10 @@ router.post("/api/burger", (req, res) => {
 });
 
 router.put("/api/burger/:id", (req, res) => {
+    console.log(req.body);
     Burger.updateOne(req.body, { id: req.params.id })
     .then(result => {
-        res.redirect("/");
+        res.sendStatus(200);
     })
     .catch(error => {
         res.sendStatus(500);
