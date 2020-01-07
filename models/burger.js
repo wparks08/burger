@@ -17,7 +17,6 @@ function selectAll() {
                 result.forEach(burger => {
                     arr.push(new Burger(burger));
                 });
-                console.log("MODEL RESULT", arr);
                 resolve(arr);
             })
             .catch(err => {

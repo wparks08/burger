@@ -7,7 +7,6 @@ orm = {
                 if (err) {
                     reject(err);
                 }
-                console.log("ORM RESULT", result);
                 resolve(result);
             });
         });
