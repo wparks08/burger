@@ -21,7 +21,7 @@ router.get("/", (req, res) => {
 });
 
 router.post("/api/burger", (req, res) => {
-    Burger.insertOne(JSON.parse(req.body))
+    Burger.insertOne(req.body)
     .then(result => {
         res.redirect("/");
     })
@@ -31,7 +31,6 @@ router.post("/api/burger", (req, res) => {
 });
 
 router.put("/api/burger/:id", (req, res) => {
-    console.log(req.body);
     Burger.updateOne(req.body, { id: req.params.id })
     .then(result => {
         res.sendStatus(200);

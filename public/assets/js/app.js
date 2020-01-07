@@ -1,4 +1,4 @@
-$(document).on("click", ".burger-button", function(event) {
+$(document).on("click", ".devour-it", function(event) {
     event.preventDefault();
 
     let data = JSON.stringify({
